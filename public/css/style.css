@@ -1,0 +1,26 @@
+#mediumModal {
+    padding-top: 80px;
+}
+
+.modal-css {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    color: #ffffff;
+}
+
+.modal-close-btn {
+    color: #ffffff;
+}
+
+.error-message {
+    color: #ff0000;
+}
+
+.submit-btn {
+    text-align: right;
+    padding-right: 0 !important;
+}
+
+.back-btn {
+    text-align: right;
+    padding-right: 0 !important;
+}
