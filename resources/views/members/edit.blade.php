@@ -1,15 +1,17 @@
 @extends('members.layout')
 @section('content')
     <div class="row">
-    <div class="col-lg-12 margin-tb mt-50">
-        <div class="pull-left p-3 mb-2 bg-secondary text-white">
-                <h4>Edit Sales Representative:</h4>
+        <div class="col-lg-12 margin-tb mt-50">
+            <div class="p-3 mb-2 bg-secondary text-white">
+                <h4>Edit Sales Representative :</h4>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('members.index') }}"> Back to List</a>
-            </div>
+
         </div>
     </div>
+    <div class="col-md-12 back-btn">
+        <a class="btn btn-primary" href="{{ route('members.index') }}"> Back to List</a>
+    </div>
+
     <script>
     $( function() {
         var today = new Date();
@@ -21,70 +23,118 @@
         });
     } );
     </script>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
 
     <form action="{{ route('members.update',$member->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <div class="form-group row">
-        <label for="full_name" class="col-sm-2 col-form-label"><strong>Full Name:</strong></label>
-        <div class="col-sm-6">
-            <input type="text" name="full_name" value="{{ $member->full_name }}" class="form-control" id="full_name" placeholder="Full Name">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="email_address" class="col-sm-2 col-form-label"><strong>Email Address:</strong></label>
-        <div class="col-sm-6">
-            <input type="text" name="email_address" value="{{ $member->email_address }}" class="form-control" id="email_address" placeholder="Email Address">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="telephone" class="col-sm-2 col-form-label"><strong>Telephone:</strong></label>
-        <div class="col-sm-6">
-           @foreach ($member->telephones as $telephone)
-                    <input type="text" name="telephone" value="{{ $telephone->number }}" id="telephone" class="form-control" placeholder="Telephone">
-           @endforeach
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="datepicker" class="col-sm-2 col-form-label"><strong>Join Date:</strong></label>
-        <div class="col-sm-6">
-            <input type="text" name="join_date" value="{{ $member->join_date }}" class="form-control" id="datepicker" placeholder="Join Date">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="datepicker" class="col-sm-2 col-form-label"><strong>Route:</strong></label>
-        <div class="col-sm-6">
-            <select name="route_id" class="form-control"> 
-                <option value="">- Select- </option>
-                @foreach ( $routes as $route)
-                <option value="{{$route->id}}" <?php  echo ($route->id==$member->route_id)?'selected':'' ?>>{{$route->route_name}}</option>
-                @endforeach
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <label class="col-md-2 col-xs-12" for="full_name"><strong>Full Name:</strong></label>
+                <input type="text" name="full_name" class="form-control col-md-6 col-xs-12"
+                       value="{{ $member->full_name }}"
+                       id="full_name" placeholder="Full Name">
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    @if ($errors->has('full_name'))
+                        <span class="error-message">{!! $errors->first('full_name') !!}</span>
+                    @endif
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <label class="col-md-2" for="email_address"><strong>Email Address:</strong></label>
+                <input type="email" name="email_address" class="form-control col-md-6" value="{{ $member->email_address }}"
+                       id="email_address" placeholder="Email Address">
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    @if ($errors->has('email_address'))
+                        <span class="error-message">{!! $errors->first('email_address') !!}</span>
+                    @endif
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <label class="col-md-2" for="telephone"><strong>Telephone:</strong></label>
 
-            </select>
+                @foreach ($member->telephones as $telephone)
+                    <input type="text" name="telephone" class="form-control col-md-6" value="{{ $telephone->number }}"
+                           id="telephone" placeholder="Telephone">
+                @endforeach
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    @if ($errors->has('telephone'))
+                        <span class="error-message">{!! $errors->first('telephone') !!}</span>
+                    @endif
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <label class="col-md-2" for="datepicker"><strong>Join Date:</strong></label>
+                <input type="text" name="join_date" class="form-control col-md-6" value="{{ $member->join_date }}"
+                       id="datepicker" placeholder="Join Date">
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    @if ($errors->has('join_date'))
+                        <span class="error-message">{!! $errors->first('join_date') !!}</span>
+                    @endif
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <label class="col-md-2" for="route_id"><strong>Route:</strong></label>
+                <select name="route_id" class="form-control col-md-6">
+                    <option value="">- Select-</option>
+                    @foreach ( $routes as $route)
+                        <option value="{{$route->id}}" <?php  echo ($route->id==$member->route_id)?'selected':'' ?>>{{$route->route_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    @if ($errors->has('route_id'))
+                        <span class="error-message">{!! $errors->first('route_id') !!}</span>
+                    @endif
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <label class="col-md-2" for="comments"><strong>Comments:</strong></label>
+                <textarea class="form-control col-md-6" style="height:150px" id="comments" name="comments"
+                          placeholder="Comments">{{ $member->comments }}</textarea>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    @if ($errors->has('comments'))
+                        <span class="error-message">{!! $errors->first('comments') !!}</span>
+                    @endif
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <label for="comments" class="col-sm-2 col-form-label"><strong>Comments:</strong></label>
-        <div class="col-sm-6">
-            <textarea class="form-control" style="height:150px" id="comments" name="comments" placeholder="Comments">{{ $member->comments }}</textarea>
+
+
+        <div class="col-md-12">
+            <div class="submit-btn">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-    <div class="col-sm-6"></div>
-        <div class="col-sm-6">
-        <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-    </div>
     </form>
+
+
 @endsection
