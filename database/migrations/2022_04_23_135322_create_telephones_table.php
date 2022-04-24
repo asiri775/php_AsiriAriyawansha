@@ -17,7 +17,6 @@ class CreateTelephonesTable extends Migration
             $table->increments('id');
             $table->string('number'); 
             $table->integer('member_id')->unsigned()->index();
-            //$table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->timestamps();
         });
     }
