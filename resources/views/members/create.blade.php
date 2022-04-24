@@ -12,8 +12,12 @@
 </div>
 <script>
     $(function() {
+        var today = new Date();
         $("#datepicker").datepicker({
-            dateFormat: 'yy-mm-dd'
+            dateFormat: 'yy-mm-dd',
+            autoclose:true,
+            endDate: "today",
+            maxDate: today
         });
     });
 </script>

@@ -12,9 +12,13 @@
     </div>
     <script>
     $( function() {
-      $( "#datepicker" ).datepicker({
-      dateFormat: 'yy-mm-dd'
-});
+        var today = new Date();
+        $("#datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',
+            autoclose:true,
+            endDate: "today",
+            maxDate: today
+        });
     } );
     </script>
     @if ($errors->any())
