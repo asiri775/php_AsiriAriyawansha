@@ -132,6 +132,7 @@ class MemberController extends Controller
 
     public function destroy(Member $member)
     {
+        Telephone::where('member_id', $member->id)->delete();
         $member->delete();
         return redirect()->route('members.index')->with('success', 'Member deleted successfully');
     }
